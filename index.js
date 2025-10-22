@@ -1,7 +1,7 @@
 const express = require('express');
 let mysql = require('mysql2');
 const app = express();
-const port = 3001;
+const port = 3309;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log('Server is running on port ${port}');
+    console.log(`Server is running on port ${port}`);
 });
 
 const db = mysql.createConnection({
@@ -21,5 +21,11 @@ const db = mysql.createConnection({
     database: 'mahasiswa'
 });
 
-
+db.connect((err) => {
+    if (err) {
+        console.error('Error connecting to the database:'+ err.stack);
+        return;
+    }
+    console.log('Connected Sussessfully.');
+});
 
